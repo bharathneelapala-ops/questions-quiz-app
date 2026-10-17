@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getQuizQuestions } from '../services/quizService';
 
-export default function TakeQuiz() {
-  const [quizId, setQuizId] = useState('');
+export default function TakeQuiz({ initialQuizId = '' }) {
+  const [quizId, setQuizId] = useState(initialQuizId ? String(initialQuizId) : '');
   const [questions, setQuestions] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -10,9 +10,14 @@ export default function TakeQuiz() {
   const [error, setError] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const handleFetchQuiz = async (e) => {
-    e.preventDefault();
-    const id = Number(quizId);
+  useEffect(() => {
+    if (initialQuizId) {
+      setQuizId(String(initialQuizId));
+      fetchQuizById(Number(initialQuizId));
+    }
+  }, [initialQuizId]);
+
+  const fetchQuizById = async (id) => {
     if (!id || id <= 0) {
       setError('Please enter a valid Quiz ID.');
       return;
@@ -37,6 +42,11 @@ export default function TakeQuiz() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleFetchQuiz = (e) => {
+    if (e) e.preventDefault();
+    fetchQuizById(Number(quizId));
   };
 
   const handleSelectOption = (questionId, optionKey) => {

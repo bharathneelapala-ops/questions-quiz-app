@@ -6,6 +6,20 @@ import './App.css';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('create');
+  const [activeQuizId, setActiveQuizId] = useState('');
+
+  const handleQuizCreated = (quizData) => {
+    if (quizData?.id) {
+      setActiveQuizId(String(quizData.id));
+    }
+  };
+
+  const handleStartQuiz = (id) => {
+    if (id) {
+      setActiveQuizId(String(id));
+      setActiveTab('take');
+    }
+  };
 
   return (
     <div className="app-layout">
@@ -13,9 +27,12 @@ export default function App() {
 
       <main className="main-content">
         {activeTab === 'create' ? (
-          <CreateQuiz onQuizCreated={() => {}} />
+          <CreateQuiz
+            onQuizCreated={handleQuizCreated}
+            onStartQuiz={handleStartQuiz}
+          />
         ) : (
-          <TakeQuiz />
+          <TakeQuiz initialQuizId={activeQuizId} />
         )}
       </main>
 
