@@ -576,3 +576,292 @@ body {
   border-top: 1px solid var(--border);
   background: var(--surface);
 }
+
+/* Wireframe Filter Bar: [ Category ] [ NumOfQuest ] */
+.filters-wireframe-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: #f8fafc;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.75rem;
+}
+
+.filter-pill-control {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1.5px solid var(--border-strong);
+  border-radius: 9999px;
+  padding: 0.35rem 0.65rem 0.35rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.filter-pill-control:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+.filter-pill-label {
+  font-size: 0.825rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-right: 0.65rem;
+  user-select: none;
+}
+
+.filter-select {
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  padding: 0.3rem 0.5rem;
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.filter-select:hover {
+  color: var(--primary);
+}
+
+.custom-category-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.filter-input-text {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  outline: none;
+  width: 120px;
+}
+
+.filter-input-text:focus {
+  border-color: var(--primary);
+}
+
+.filter-btn-reset {
+  border: none;
+  background: #e2e8f0;
+  color: var(--text-muted);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.filter-btn-reset:hover {
+  background: #cbd5e1;
+  color: var(--text-main);
+}
+
+.filter-number-group {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  padding: 0.15rem;
+}
+
+.filter-step-btn {
+  border: none;
+  background: var(--surface);
+  color: var(--text-main);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.15s ease;
+}
+
+.filter-step-btn:hover:not(:disabled) {
+  background: var(--primary);
+  color: white;
+}
+
+.filter-step-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.filter-input-number {
+  border: none;
+  background: transparent;
+  width: 44px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.filter-input-number::-webkit-inner-spin-button,
+.filter-input-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Quick Filter Chips */
+.quick-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.quick-filter-hint {
+  font-size: 0.775rem;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+
+.chip-pill {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: 9999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chip-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chip-pill.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* Query Mapping Card (API Inspector) */
+.query-mapping-card {
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin: 0.5rem 0 1.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.query-mapping-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+}
+
+.query-method-badge {
+  background: #22c55e;
+  color: #052e16;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.query-endpoint-name {
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.query-mapping-tag {
+  margin-left: auto;
+  color: #94a3b8;
+  font-size: 0.7rem;
+}
+
+.query-mapping-body code {
+  color: #38bdf8;
+  font-size: 0.875rem;
+  word-break: break-all;
+}
+
+/* Title config collapsible */
+.title-config-section {
+  border-top: 1px dashed var(--border);
+  padding-top: 1rem;
+}
+
+.toggle-title-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0;
+}
+
+.toggle-title-btn:hover {
+  color: var(--primary);
+}
+
+.current-title-badge {
+  background: #f1f5f9;
+  color: var(--text-main);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+}
+
+.title-input-wrapper {
+  margin-top: 0.75rem;
+}
+
+/* Start Quiz CTA */
+.alert-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.start-quiz-btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.start-quiz-btn:hover {
+  opacity: 0.9;
+}
+

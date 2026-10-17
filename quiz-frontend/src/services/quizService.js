@@ -54,3 +54,23 @@ export async function getQuizQuestions(quizId) {
 
   return response.json();
 }
+
+/**
+ * Fetches available distinct categories from the backend.
+ * Falls back to empty list on error.
+ *
+ * @returns {Promise<string[]>}
+ */
+export async function getCategories() {
+  try {
+    const response = await fetch(`${BASE_URL}/question/categories`, {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+    if (!response.ok) return [];
+    return await response.json();
+  } catch {
+    return [];
+  }
+}
