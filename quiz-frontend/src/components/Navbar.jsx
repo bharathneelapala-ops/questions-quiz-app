@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Navbar({ activeTab, onSelectTab }) {
   return (
     <header className="navbar">
@@ -10,6 +8,13 @@ export default function Navbar({ activeTab, onSelectTab }) {
         </div>
 
         <nav className="navbar-links" aria-label="Main Navigation">
+          <button
+            type="button"
+            className={`nav-link ${activeTab === 'questions' ? 'active' : ''}`}
+            onClick={() => onSelectTab('questions')}
+          >
+            All Questions
+          </button>
           <button
             type="button"
             className={`nav-link ${activeTab === 'create' ? 'active' : ''}`}

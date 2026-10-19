@@ -74,3 +74,56 @@ export async function getCategories() {
     return [];
   }
 }
+
+/**
+ * Fetches all questions from the backend API.
+ * Endpoint: /question/allQuestions
+ *
+ * @returns {Promise<Array>} List of question objects
+ */
+export async function getAllQuestions() {
+  try {
+    const response = await fetch(`${BASE_URL}/question/allQuestions`, {
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      return await response.json();
+    }
+
+    const errorText = await response.text().catch(() => '');
+    throw new Error(
+      errorText || `Failed to fetch questions (${response.status}: ${response.statusText})`
+    );
+  } catch (err) {
+    if (err.name === 'TypeError' && err.message.includes('fetch')) {
+      throw new Error(`Cannot connect to backend server at ${BASE_URL}. Ensure Spring Boot is running on port 8082.`, { cause: err });
+    }
+    throw err;
+  }
+}
+
+/**
+ * Fetches questions for a specific category.
+ * Endpoint: /question/category/{category}
+ *
+ * @param {string} category
+ * @returns {Promise<Array>} List of question objects
+ */
+export async function getQuestionsByCategory(category) {
+  const encodedCat = encodeURIComponent(category);
+  const response = await fetch(`${BASE_URL}/question/category/${encodedCat}`, {
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch questions for category "${category}" (${response.status})`);
+  }
+
+  return response.json();
+}
+

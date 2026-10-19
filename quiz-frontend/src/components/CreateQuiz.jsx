@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { createQuiz, getCategories } from '../services/quizService';
 
 const DEFAULT_CATEGORIES = ['Java', 'Python', 'JavaScript', 'Spring Boot', 'SQL'];
 const QUICK_COUNTS = [3, 5, 10, 15, 20];
 
-export default function CreateQuiz({ onQuizCreated, onStartQuiz }) {
+export default function CreateQuiz({ onQuizCreated, onStartQuiz, initialCategory }) {
   const [categories, setCategories] = useState(DEFAULT_CATEGORIES);
-  const [category, setCategory] = useState('Java');
+  const [category, setCategory] = useState(initialCategory || 'Java');
   const [customCategory, setCustomCategory] = useState('');
   const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [numQ, setNumQ] = useState(5);
@@ -24,9 +24,6 @@ export default function CreateQuiz({ onQuizCreated, onStartQuiz }) {
         // Merge backend categories with defaults and deduplicate
         const merged = Array.from(new Set([...backendCategories, ...DEFAULT_CATEGORIES]));
         setCategories(merged);
-        if (!merged.includes(category)) {
-          setCategory(merged[0]);
-        }
       }
     });
     return () => {

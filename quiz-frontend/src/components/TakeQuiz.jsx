@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getQuizQuestions } from '../services/quizService';
 
 export default function TakeQuiz({ initialQuizId = '' }) {
@@ -10,14 +10,7 @@ export default function TakeQuiz({ initialQuizId = '' }) {
   const [error, setError] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  useEffect(() => {
-    if (initialQuizId) {
-      setQuizId(String(initialQuizId));
-      fetchQuizById(Number(initialQuizId));
-    }
-  }, [initialQuizId]);
-
-  const fetchQuizById = async (id) => {
+  const fetchQuizById = useCallback(async (id) => {
     if (!id || id <= 0) {
       setError('Please enter a valid Quiz ID.');
       return;
@@ -42,7 +35,38 @@ export default function TakeQuiz({ initialQuizId = '' }) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!initialQuizId) return;
+    let ignore = false;
+    const id = Number(initialQuizId);
+    if (!id || id <= 0) return;
+
+
+
+    getQuizQuestions(id)
+      .then((data) => {
+        if (!ignore) {
+          if (!data || data.length === 0) {
+            setError(`No questions found for Quiz ID #${id}.`);
+          } else {
+            setQuestions(data);
+          }
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        if (!ignore) {
+          setError(err.message || 'Failed to load quiz.');
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [initialQuizId]);
 
   const handleFetchQuiz = (e) => {
     if (e) e.preventDefault();

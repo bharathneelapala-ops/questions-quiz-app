@@ -1,4 +1,4 @@
-import React, { useState, useId } from 'react';
+import { useState, useId } from 'react';
 
 const POPULAR_CATEGORIES = ['Java', 'Python', 'JavaScript', 'Spring Boot', 'SQL'];
 
